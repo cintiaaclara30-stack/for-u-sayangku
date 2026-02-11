@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For u sayangku💐🤍</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #FFD1DC, #FFB6C1);
+  }
+
+  /* Popup password */
+  #password-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff0f5;
+    padding: 30px;
+    border: 2px solid #ff69b4;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+
+  #password-popup input {
+    padding: 10px;
+    border: 2px solid #ff69b4;
+    border-radius: 8px;
+    margin-top: 10px;
+    width: 80%;
+    font-size: 1em;
+  }
+
+  #password-popup button {
+    padding: 10px 20px;
+    margin-top: 15px;
+    border: none;
+    background: #ff69b4;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  #password-popup button:hover {
+    background: #ff1493;
+  }
+
+  #error-msg {
+    color: red;
+    margin-top: 10px;
+    font-size: 0.9em;
+  }
+
+  /* Amplop */
+  .envelope-container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    cursor: pointer;
+    perspective: 1000px;
+    display: none; /* sembunyikan sampai password benar */
+  }
+
+  .envelope {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff0f5;
+    border: 2px solid #ff69b4;
+    border-radius: 10px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+  }
+
+  .envelope .flap {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background: #ff69b4;
+    top: 0;
+    left: 0;
+    transform-origin: top;
+    transition: transform 1s;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  /* Surat */
+  .letter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    height: 90%;
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    transform: translate(-50%, -50%) translateY(-120%) scale(0.8);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 1s;
+  }
+
+  .envelope.open .flap {
+    transform: rotateX(-180deg);
+  }
+
+  .envelope.open .letter {
+    transform: translate(-50%, -50%) translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  .letter h1 {
+    font-size: 1.5em;
+    color: #ff1493;
+    margin-bottom: 10px;
+  }
+
+  .letter p {
+    font-size: 1em;
+    color: #333;
+    line-height: 1;
+  }
+
+  .letter::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+    transform: rotate(45deg);
+    transition: all 1s;
+    pointer-events: none;
+  }
+
+  .envelope.open .letter::before {
+    top: 0;
+    left: 0;
+  }
+
+</style>
+</head>
+<body>
+
+<div id="password-popup">
+  <h2>masukan password terlebih dahulu</h2>
+  <input type="password" id="password" placeholder="Masukann..">
+  <br>
+  <button onclick="checkPassword()">Openn</button>
+  <div id="error-msg"></div>
+</div>
+
+<div class="envelope-container" onclick="openEnvelope()">
+  <div class="envelope" id="envelope">
+    <div class="flap"></div>
+    <div class="letter">
+      <h1>For U sayangku💐🤍</h1>
+      <p>makasih udah jadi bagian paling indah di hidup aku, aku bersyukur banget ada kamu di setiap hari hari aku tetep sama aku terus yah I LOVE U🤍🤍
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const correctPassword = "090824"; // ganti sesuai keinginan
+
+  function checkPassword() {
+    const input = document.getElementById('password').value;
+    const errorMsg = document.getElementById('error-msg');
+    if(input === correctPassword){
+      document.getElementById('password-popup').style.display = 'none';
+      document.querySelector('.envelope-container').style.display = 'block';
+    } else {
+      errorMsg.textContent = "yahh ko salah";
+    }
+  }
+
+  function openEnvelope() {
+    const envelope = document.getElementById('envelope');
+    envelope.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
